@@ -36,20 +36,16 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
- let container = document.querySelector(selector)
-
-  axios.get('https://lambda-times-api.herokuapp.com/topics')
+  axios
+    .get(`https://lambda-times-api.herokuapp.com/topics`)
     .then(response => {
-      let recieved = response.data.topics
+      let recieved = response.data.topics;
       let newTab = Tabs(recieved)
-      container.appendChild(topicsDiv)
-      container.appendChild(newTab)
-      
-  })  
+      document.querySelector(selector).appendChild(newTab);
+    })
     .catch(error => {
       console.log(error)
       debugger
     })
 }
-
 export { Tabs, tabsAppender }
